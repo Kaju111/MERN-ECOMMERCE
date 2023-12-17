@@ -67,10 +67,14 @@ export default function ProductList() {
         newFilter[section.id] = [option.value];
       }
     } else {
-      const index = newFilter[section.id].findIndex(
-        (el) => el === option.value
-      );
-      newFilter[section.id].splice(index, 1);
+      if (newFilter[section.id] && Array.isArray(newFilter[section.id])) {
+        const index = newFilter[section.id].findIndex(
+          (el) => el === option.value
+        );
+        if (index != -1) {
+          newFilter[section.id].splice(index, 1);
+        }
+      }
     }
     setFilter(newFilter);
   };
